@@ -2,7 +2,7 @@ import re
 import subprocess
 
 def get_git_status():
-    has_pending_commits = True
+    has_pending_commits = False
     has_untracked_files = False
     origin_position = ""
     output = subprocess.Popen(['git', 'status', '--ignore-submodules'],
@@ -20,8 +20,8 @@ def get_git_status():
         if diverged_status:
             origin_position = " %d%c %d%c" % (int(diverged_status[0][0]), u'\u21E1', int(diverged_status[0][1]), u'\u21E3')
 
-        if line.find('nothing to commit') >= 0:
-            has_pending_commits = False
+        if line.find('Changes to be committed') >= 0 or line.find('Changes not staged for commit') >= 0:
+            has_pending_commits = True
         if line.find('Untracked files') >= 0:
             has_untracked_files = True
     return has_pending_commits, has_untracked_files, origin_position
