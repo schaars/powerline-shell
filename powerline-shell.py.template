@@ -14,7 +14,7 @@ class Powerline:
             'lock': 'RO',
             'network': 'SSH',
             'separator': u'\u25B6',
-            'separator_thin': u'\u276F'
+            'separator_thin': u'/'
         },
         'patched': {
             'lock': u'\uE0A2',
